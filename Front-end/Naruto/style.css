@@ -1,0 +1,66 @@
+html{
+    background-color: azure;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-variant: normal;
+    margin: auto;
+    padding: auto;
+    text-align: justify;
+}
+header{
+    background-color: darkblue;
+    size-adjust: auto;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+}
+#navegacao ul{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: darkblue;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+#navegacao ul li{
+    margin: auto;
+    list-style: none;
+}
+#navegacao ul li a{
+    font-weight: bolder;
+    color: crimson;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 15px;
+}
+#navegacao ul li a:hover{
+    background-color: aqua;
+    color: aliceblue;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 15px;
+}
+section{
+    background-color: lightblue;
+    size-adjust: auto;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: justify;
+}
+footer{
+    background-color: lightblue;
+    size-adjust: auto;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 15px;
+    text-align: center;
+}
+script{
+    background-color: azure;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-variant: normal;
+}

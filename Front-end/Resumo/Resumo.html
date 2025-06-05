@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo</title>
+</head>
+
+<body>
+
+    <style>
+    html{
+        background-color: azure;
+        color: black;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-variant: normal;
+        margin: auto;
+        padding: auto;
+        text-align: justify;
+    }
+    header{
+        background-color: darkblue;
+        size-adjust: auto;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 15px;
+        text-align: center;
+    }
+    section{
+        background-color: lightblue;
+        size-adjust: auto;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 15px;
+        text-align: justify;
+    }
+    img{
+        width: 500px;
+    }
+    </style>
+
+    <header>
+        <h1>Este é um título</h1>
+        <p>Bem vindo a nosso site</p>
+    </header>
+
+    <section>
+        <p><b>Lorem ipsum dolor sit amet</b>, consectetur adipiscing elit. Vivamus venenatis euismod neque sed gravida. Aenean a orci pellentesque elit finibus convallis. Nunc id dignissim dolor, eget euismod sapien. Curabitur risus metus, pulvinar at nunc maximus, porttitor efficitur eros. Morbi molestie mi sed orci iaculis, quis mattis dui dictum. Nam malesuada, ex non interdum congue, mauris ipsum imperdiet dolor, id hendrerit dui nisl nec lectus. Vestibulum a massa quis arcu aliquam lacinia sit amet quis mi. Etiam hendrerit tempus velit, ut porta velit aliquet vel. Nulla sapien massa, luctus sed lacus pulvinar, elementum venenatis ipsum. Nulla nunc leo, tempus eu accumsan id, bibendum quis orci. Quisque lectus elit, ultrices a ullamcorper sit amet, malesuada eu metus. In hac habitasse platea dictumst. Aliquam venenatis justo nunc, quis porta purus consequat quis. Proin vulputate purus sem, vel sagittis tellus congue nec.</p>
+    </section>
+
+    <section>
+        <img src="https://miro.medium.com/v2/resize:fit:1200/1*-EpsqHbxWA2oDr-8wt5ogQ.jpeg" alt="Imagem Lorem Ipsum"> <br><br>
+        <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwij7NWi2M2MAxUMK7kGHTRcBf8QFnoECA0QAQ&url=https%3A%2F%2Fwww.lipsum.com%2F&usg=AOvVaw3IbaiMywyUbmgvR0gmOYy8&opi=89978449"></a> <br><br>
+    </section>
+
+    <section>
+        <form>
+
+            <label for="nome">Nome:</label> <br><br>
+            <input type="text" name="nome" id="nome" required placeholder="Nome"> <br><br>
+
+            <label for="CPF">CPF:</label> <br><br>
+            <input type="text" name="cpf" \
+			pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" \
+			title="Digite um CPF no formato: xxx.xxx.xxx-xx"\
+            size="50" required placeholder="Digite seu CPF no Formato: xxx.xxx.xxx-xx"> <br><br>
+
+            <label for="data_nasc">Data de nascimento:</label> <br><br>
+            <input type="date" name="data_nasc" id="data_nasc"> <br><br>
+
+            <button type="submit">Enviar</button> <br><br>
+            <button type="reset">Resetar dados</button> <br><br>
+        </form>
+    </section>
+
+</body>
+</html>

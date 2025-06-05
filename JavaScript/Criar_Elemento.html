@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar elemento</title>
+</head>
+<body>
+
+    <h2>Exercício criar elemento</h2>
+    <button onclick="criarParagrafo()">Adicionar Parágrafo</button>
+    <div id="area"></div>
+
+    <script>
+        function criarParagrafo(){
+            const novo = document.createElement("p");
+            novo.innerText = "Este é um parágrafo criado dinamicamente";
+            document.getElementById("area").appendChild(novo);
+        }
+    </script>
+    
+</body>
+</html>
