@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagina2</title>
+</head>
+<body>
+    
+    <h2>Página 2</h2>
+    <p id="mensagem"></p>
+
+    <script>
+
+        const nome = localStorage.getItem("usuario")
+        document.getElementById("mensagem").innerText = "Olá, " + nome + "!";
+    
+    </script>
+    
+</body>
+</html>
