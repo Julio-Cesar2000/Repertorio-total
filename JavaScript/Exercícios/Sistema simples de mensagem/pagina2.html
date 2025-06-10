@@ -14,11 +14,13 @@
 
     <script>
 
+        //Mostra a mensagem digitada na página anterior
         const mensagem = localStorage.getItem("mensagem")
         document.getElementById("texto").innerText = "Olá, " + mensagem + "!";
 
+        //Limpa o armazenamento local:
         function limpar(){
-            const mensagem =localStorage.removeItem("mensagem");
+            const mensagem = localStorage.removeItem("mensagem");
             window.location.href = "index.html";
         }
     
