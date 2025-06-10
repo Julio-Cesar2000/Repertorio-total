@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagina2</title>
+</head>
+<body>
+    
+    <h2>Página 2</h2>
+    <p id="texto"></p>
+
+    <button onclick="limpar()">Limpar a mensagem</button>
+
+    <script>
+
+        const mensagem = localStorage.getItem("mensagem")
+        document.getElementById("texto").innerText = "Olá, " + mensagem + "!";
+
+        function limpar(){
+            const mensagem =localStorage.removeItem("mensagem");
+            window.location.href = "index.html";
+        }
+    
+    </script>
+    
+</body>
+</html>
