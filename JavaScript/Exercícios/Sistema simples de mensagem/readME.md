@@ -1,0 +1,1 @@
+Foi utilizado Inteligência Artificial nesse código, IA: Deepseek

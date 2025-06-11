@@ -1,0 +1,27 @@
+html{
+    background-color: azure;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-variant: normal;
+    margin: auto;
+    padding: auto;
+    text-align: justify;
+}
+h2{
+    margin: 5px;
+    padding: 5px;
+}
+input{
+    margin: 5px;
+    padding: 5px;
+}
+p{
+    margin: 5px;
+    padding: 5px;
+}
+button{
+    background-color: black;
+    display: block;
+    margin: 5px;
+    padding: 5px;
+}

@@ -15,7 +15,6 @@ novoParagrafo.innerText = "Este é um novo parágrafo";
 document.body.appendChild(novoParagrafo);
 
 // Remover elemento:
-
 let elemento = document.getElementById("texto");
 elemento.remove;
 

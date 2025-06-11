@@ -3,26 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina 1</title>
-</head>
-<body>
-
-    <h2>Página 1</h2>
-    <input type="text" id="mensagem" placeholder="Digite uma mensagem">
-
-    <button onclick = "enviar()">Ir à página 2</button>
-
-    <script>
-
-        //Função de enviar uma mensagem para uma segunda página:
-        function enviar(){
-            const mensagem = document.getElementById("mensagem").value;
-            localStorage.setItem("mensagem", mensagem);
-            window.location.href = "pagina2.html";
+    <title>Envio de Mensagens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-    </script>
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        input::placeholder {
+            color: #95a5a6;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            height: 24px;
+        }
+
+        .error.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+            background: linear-gradient(to right, #2980b9, #3498db);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .message-preview {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            text-align: left;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .message-preview.show {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .message-preview h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .message-preview p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .instructions {
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enviar Mensagem</h1>
+        <p class="subtitle">Digite sua mensagem para enviar à Página 2</p>
+        
+        <div class="input-group">
+            <input type="text" id="mensagem" required placeholder="Digite sua mensagem aqui...">
+        </div>
+        
+        <div id="mensagemErro" class="error"></div>
+        
+        <button class="btn" onclick="enviar()">
+            <span class="icon">➡️</span> Ir à página 2
+        </button>
+        
+        <div id="messagePreview" class="message-preview">
+            <h3>Pré-visualização</h3>
+            <p id="previewText"></p>
+        </div>
+        
+        <div class="instructions">
+            <h3><span class="icon">ℹ️</span> Como funciona</h3>
+            <ul>
+                <li>Digite sua mensagem no campo acima</li>
+                <li>Clique no botão para enviar à página 2</li>
+                <li>Sua mensagem será armazenada no navegador</li>
+                <li>A página 2 recuperará e exibirá sua mensagem</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const mensagemInput = document.getElementById('mensagem');
+        const mensagemErro = document.getElementById('mensagemErro');
+        const messagePreview = document.getElementById('messagePreview');
+        const previewText = document.getElementById('previewText');
+        
+        // Atualizar pré-visualização em tempo real
+        mensagemInput.addEventListener('input', function() {
+            const msg = this.value.trim();
+            
+            if (msg) {
+                previewText.textContent = msg;
+                messagePreview.classList.add('show');
+                
+                // Esconder mensagem de erro se existir
+                mensagemErro.classList.remove('show');
+                mensagemErro.textContent = '';
+            } else {
+                messagePreview.classList.remove('show');
+            }
+        });
+        
+        // Função de enviar uma mensagem para uma segunda página
+        function enviar() {
+            const mensagem = mensagemInput.value.trim();
+            
+            if (mensagem === "") {
+                mensagemErro.textContent = "Por favor, preencha o campo de mensagem";
+                mensagemErro.classList.add('show');
+                
+                // Dar destaque visual ao campo
+                mensagemInput.style.borderColor = '#e74c3c';
+                setTimeout(() => {
+                    mensagemInput.style.borderColor = '#e0e0e0';
+                }, 2000);
+                
+                return;
+            }
+            
+            // Armazenar mensagem no localStorage
+            localStorage.setItem("mensagem", mensagem);
+            
+            // Redirecionar para a página 2
+            window.location.href = "pagina2.html";
+        }
+        
+        // Focar no campo de mensagem ao carregar a página
+        window.onload = function() {
+            mensagemInput.focus();
+        };
+    </script>
 </body>
 </html>
