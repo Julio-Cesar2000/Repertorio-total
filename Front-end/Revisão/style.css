@@ -1,0 +1,19 @@
+.box{
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 500px;
+    background-color: brown;
+}
+.box div{
+    height: 250px;
+    width: 250px;
+    background-color: aqua;
+    transition: transform 03s ease
+}
+
+.box div:hover{
+    transform: scale(1.5);
+}
