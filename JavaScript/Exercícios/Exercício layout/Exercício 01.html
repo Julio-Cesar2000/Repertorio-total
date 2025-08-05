@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layuout prático</title>
+</head>
+
+<style>
+    body{
+        margin: 15px;
+        text-align: center;
+        justify-content: center;
+        font-family: 'Times New Roman', Times, serif;
+        background-color: antiquewhite;
+
+    }
+</style>
+
+<body>
+
+    <h1>Bem Vindo caro usuário!!!!!</h1>
+
+    <p>Esse site te dara boas vindas de forma gratuita sem <b>VÍRUS!!!!</b> Esteje feliz por tamanha oferta!!!</p>
+
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome" required placeholder="Digite seu nome:">
+
+    <button onclick="saudar()" id="butao">Entrar</button>
+    <p id = "mensagem"></p>
+
+    <script>
+        function saudar(){
+            const nome = document.getElementById("nome").value
+            document.getElementById("mensagem").innerText = "Olá, " + nome + " Bem vindo ao nosso site e a nossa saudação sem VÍRUS!!!"
+        }
+    </script>
+    
+</body>
+</html>
