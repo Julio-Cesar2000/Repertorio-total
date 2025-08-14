@@ -14,7 +14,7 @@
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":email", $email);
-            return $stmt->execute()
+            return $stmt->execute();
         }
     }
 
