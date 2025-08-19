@@ -2,8 +2,12 @@
 
     class AlunoController {
         public function listarAlunos(): void {
-            $alunos = Aluno::listarTodos();
+            $alunoController = New Aluno();
+            $alunos = $alunoController->listarTodos();
             include 'View/alunos.php';
+        }
+        public function adicionar(){
+
         }
     }
 

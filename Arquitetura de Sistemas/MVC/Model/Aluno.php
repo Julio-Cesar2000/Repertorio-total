@@ -1,13 +1,20 @@
 <?php
 
     class Aluno {
-        public static function listarTodos(): array {
-            return [
-                ["nome" => "Júlio Cesar", "idade" => 17],
-                ["nome" => "Bruno Quintino", "idade" => 18],
-                ["nome" => "Lucimara Aparecida", "idade" => 18],
-                ["nome" => "Pedro Henrique", "idade" => 18],
-                ["nome" => "Ubiratã", "idade" => 4300000000],
+        public function __construct() {
+            if (!isset($_SESSION['alunos'])){
+                $_SESSION['alunos'] = [];
+            };
+        }
+
+        public function listarTodos(): array {
+            return $_SESSION['alunos'];
+        }
+
+        public function adicionar(string $nome, int $idade): void {
+            $_SESSION['alunos'] = [
+                'nome'=>$nome,
+                'idade'=>$idade
             ];
         }
     }

@@ -1,7 +1,7 @@
 <?php
 
     class Conexao {
-        private $dbName = "joao_lopes";
+        private $dbName = "CRUD_Simples";
         private $host = "localhost";
         private $user = "root";
         private $password = "1234";
@@ -20,8 +20,5 @@
         }
 
     }
-
-    $conexao = new Conexao;
-    $conexao->connect();
 
 ?>
