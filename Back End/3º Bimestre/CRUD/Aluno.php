@@ -15,9 +15,15 @@
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":password", $password);
-            echo "Teste";
             return $stmt->execute();
         }
+
+        public function readAll(): array {
+            $sql = "SELECT * FROM alunos";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+        }
+
     }
 
 ?>
