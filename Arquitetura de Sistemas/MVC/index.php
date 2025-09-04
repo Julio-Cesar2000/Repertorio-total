@@ -5,8 +5,8 @@
     require_once 'Controller/AlunoController.php';
 
     $controller = new AlunoController();
-    $acao = $_GET['acao'];
-    if ($acao == "adicionar") {
+    $acao = $_GET['acao'] ?? '';
+    if ($acao === "adicionar") {
         $controller->adicionar();
     }
     else {

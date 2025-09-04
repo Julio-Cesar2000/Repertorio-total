@@ -8,19 +8,23 @@
     <h1>Alunos</h1>
 
     <ul>
-    <?php foreach ($alunos as $aluno) { ?>
-        <li> <?php echo "Nome: " . $aluno ['nome'] ." || Idade: " . $aluno ['idade'];?> </li>
-        <?php } ?>
-    </ul>
+    
+    <?php if (count($alunos)) > 0 { ?>
+        <ul>
+            <?php foreach($alunos as $aluno) { ?>
+                <li><?php echo $aluno ['nome'] ?></li>
+        </ul>
+        <?php }
+        }?>
 
     <h1>Adicionar Alunos</h1>
-    <form action="acao=adicionar">
+    <form action="?acao=adicionar" method="post">
 
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" required placeholder="Coloque o nome do aluno"> <br>
 
         <label for="idade">Idade:</label>
-        <input type="text" name="idade" id="idade" required placeholder="Informe a idade do aluno"> <br>
+        <input type="number" name="idade" id="idade" required placeholder="Informe a idade do aluno"> <br>
 
         <button type = "submit">Adicionar</button>
 
