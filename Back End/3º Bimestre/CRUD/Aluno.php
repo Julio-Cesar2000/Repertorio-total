@@ -18,12 +18,15 @@
             return $stmt->execute();
         }
 
-        public function readAll(): array {
+        public function readAll(): void {
             $sql = "SELECT * FROM alunos";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
         }
 
     }
+
+    $obj = new Aluno();
+    print_r($obj->readAll());
 
 ?>
