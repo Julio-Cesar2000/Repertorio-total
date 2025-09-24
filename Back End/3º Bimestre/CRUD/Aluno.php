@@ -27,8 +27,9 @@
         }
 
         public function update(int $id, string $name, string $email, string $password): bool{
-            $sql = "UPDATE alunos SET nome = :name, email = :email, senha = :password WHERE id = :id";
+            $sql = "UPDATE alunos SET nome=:name, email=:email, senha=:password WHERE id=:id";
             $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":id", $id);
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":password", $password);
@@ -39,6 +40,7 @@
     }
 
     $obj = new Aluno();
+    $obj->update(2, "Bruno", "bruno@gmail.com","1345");
     $tabela = $obj->readAll();
     print_r($tabela);
 
