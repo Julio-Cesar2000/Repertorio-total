@@ -37,11 +37,14 @@
             return $stmt->execute();
         }
 
-    }
+        public function delete(int $id): bool {
+            $sql = "DELETE FROM alunos WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":id", $id);
+            echo "Aluno excluido";
+            return $stmt->execute();
+        }
 
-    $obj = new Aluno();
-    $obj->update(2, "Bruno", "bruno@gmail.com","1345");
-    $tabela = $obj->readAll();
-    print_r($tabela);
+    }
 
 ?>

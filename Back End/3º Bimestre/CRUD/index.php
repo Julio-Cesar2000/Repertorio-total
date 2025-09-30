@@ -1,3 +1,17 @@
+<?php
+
+    require_once "Aluno.php";
+    $aluno = new Aluno();
+    if (isset($_POST['create'])) {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+        $aluno->create($nome, $email, $senha);
+        //header("Location : index.php");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,8 +26,13 @@
 <!-- Formulário de Cadastro -->
 <form method="POST">
     <input type="hidden" name="id" value="">
+
     <input type="text" name="nome" placeholder="Nome" required>
+    
     <input type="email" name="email" placeholder="Email" required>
+    
+    <input type="password" name="senha" placeholder="Senha" required>
+
     <button type="submit" name="create">Cadastrar</button>
 </form>
 
