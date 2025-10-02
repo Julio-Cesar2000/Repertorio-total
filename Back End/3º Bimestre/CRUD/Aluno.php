@@ -15,7 +15,6 @@
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":password", $password);
-            echo "Aluno inserido.";
             return $stmt->execute();
         }
 
@@ -26,14 +25,12 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function update(int $id, string $name, string $email, string $password): bool{
-            $sql = "UPDATE alunos SET nome=:name, email=:email, senha=:password WHERE id=:id";
+        public function update(int $id, string $name, string $email): bool{
+            $sql = "UPDATE alunos SET nome=:name, email=:email WHERE id=:id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":name", $name);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":password", $password);
-            echo "Aluno Atualizado.";
             return $stmt->execute();
         }
 
@@ -41,7 +38,6 @@
             $sql = "DELETE FROM alunos WHERE id=:id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":id", $id);
-            echo "Aluno excluido";
             return $stmt->execute();
         }
 

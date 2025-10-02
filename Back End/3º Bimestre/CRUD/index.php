@@ -7,7 +7,20 @@
         $email = $_POST['email'];
         $senha = $_POST['senha'];
         $aluno->create($nome, $email, $senha);
-        //header("Location : index.php");
+    }
+
+    $alunos = $aluno->readAll();
+
+    if (isset($_GET['delete'])) {
+        $id = $_GET['delete'];
+        $aluno->delete($id);
+    }
+
+    if (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $aluno->update($id, $nome, $email);
     }
 
 ?>
