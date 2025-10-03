@@ -1,113 +1,118 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; //Importa o módulo de formulário
+import { FormsModule } from '@angular/forms'; // Importa o módulo de formulários do Angular para usar two-way data binding
 
-interface Todo {
-  id: number;
-  title: string;
-  done: boolean;
-  createdAt: string;
+interface Todo { // Define a estrutura de uma tarefa
+  id: number;       // Identificador único baseado em timestamp
+  title: string;    // Texto descritivo da tarefa
+  done: boolean;    // Status de conclusão
+  createdAt: string; // Data de criação em formato ISO
 }
 
-@Component({ //Declara o nome da tag
-  selector: 'app-home', // seleciona a tag
-  standalone: true, // módulo independente
-  imports: [IonicModule, CommonModule, FormsModule],
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+@Component({ // Decorador que define a classe como componente Angular
+  selector: 'app-home', // Tag HTML para usar este componente
+  standalone: true,     // Indica que é um componente autossuficiente
+  imports: [IonicModule, CommonModule, FormsModule], // Módulos necessários
+  templateUrl: './home.page.html', // Template associado
+  styleUrls: ['./home.page.scss'], // Estilos associados
 })
+export class HomePage implements OnInit { // Implementa ciclo de vida OnInit
+  newTitle = ''; // Binding para entrada de nova tarefa
+  todos: Todo[] = []; // Armazena lista de tarefas
 
+  constructor( // Injeção de dependências
+    private alertCtrl: AlertController, // Para criar alertas
+    private toastCtrl: ToastController  // Para criar notificações toast
+  ) { }
 
-export class HomePage implements OnInit { // Início da classe do componente também implementa o OnInit
-  newTitle = ''; // Propriedade ligada ao IonInput para capturar o texto da nova tarefa
-  todos: Todo[] = []; // Array que guarda a lista de tarefas na memória
-
-  constructor( // Injeta os controladores de alerta e de toast, guardando-os em propriedades privadas
-    private alertCtrl: AlertController,
-    private toastCtrl: ToastController
-  ) {}
-
-  ngOnInit() { // Hook de ciclo de vida
-    const raw = localStorage.getItem('todos'); // Leitura do LocalStorage dachave 'todos'
-    this.todos = raw ? JSON.parse(raw) as Todo[] : []; // Se exitir faz uma injeção parse
+  ngOnInit() { // Executado ao inicializar o componente
+    const raw = localStorage.getItem('todos'); // Recupera dados do localStorage
+    this.todos = raw ? JSON.parse(raw) as Todo[] : []; // Parsing ou array vazio
   }
 
-
-
-
-
-  private persist() { // Método auxiliar para um array no LocalStorage
+  private persist() { // Método interno para salvar no localStorage
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
-  async addTodo() { // Início do método para adicionar tarefas
-    const title = this.newTitle.trim(); // Remove todos os espaços da tarefa
-    if (!title) { // Valida se o campo está vazio e cria e mostra um toats e saí do método
-      const t = await this.toastCtrl.create({ message: 'Digite uma tarefa.', duration: 1500 });
+  async addTodo() { // Adiciona nova tarefa
+    const title = this.newTitle.trim(); // Remove espaços desnecessários
+    if (!title) { // Valida se há texto
+      const t = await this.toastCtrl.create({
+        message: 'Digite uma tarefa.',
+        duration: 1500
+      });
       await t.present();
-      return;
+      return; // Interrompe execução se vazio
     }
-    const todo: Todo = { // Todo é uma constante e mostra-o
-      id: Date.now(), // Mostra o tempo atual
-      title, // Texto digitado
-      done: false, // inicia como falso
-      createdAt: new Date().toISOString(), // Registra a data
+    const todo: Todo = { // Cria novo objeto Todo
+      id: Date.now(), // ID baseado no timestamp atual
+      title,          // Nome da tarefa (short-hand property)
+      done: false,    // Inicializa como não concluída
+      createdAt: new Date().toISOString(), // Data/hora em ISO
     };
-    this.todos.unshift(todo); //Insere a nova tarefa no início do array, fazendo-a aparecer lá no topo
-    this.newTitle = ''; // Salava a lista atualizada nbo LocalStorage e encerra o método
-    this.persist();
+    this.todos.unshift(todo); // Adiciona no início do array
+    this.newTitle = ''; // Limpa campo de entrada
+    this.persist();     // Salva alterações
   }
 
-  toggleDone(todo: Todo) { //Inverte o status de concluida e não concluida e salva
+  toggleDone(todo: Todo) { // Alterna status de conclusão
     todo.done = !todo.done;
-    this.persist();
+    this.persist(); // Persiste mudança
   }
 
-  async editTodo(todo: Todo) { //Abra um alert de texto pré-preenchido com o título atual
+  async editTodo(todo: Todo) { // Edita tarefa existente
     const alert = await this.alertCtrl.create({
       header: 'Editar tarefa',
-      inputs: [{ name: 'title', type: 'text', value: todo.title, placeholder: 'Descrição' }],
+      inputs: [{
+        name: 'title',
+        type: 'text',
+        value: todo.title, // Pré-preencher com valor atual
+        placeholder: 'Descrição'
+      }],
       buttons: [
-        { text: 'Cancelar', role: 'cancel' }, // Cancelar só fecha
+        { text: 'Cancelar', role: 'cancel' }, // Fecha alerta
         {
-          text: 'Salvar', // Salva
+          text: 'Salvar',
           handler: (data) => {
-            const t = (data.title || '').trim(); // Ler o valor digitado e (data.title)
+            const t = (data.title || '').trim(); // Limpa e valida entrada
             if (t) {
-              todo.title = t;
-              this.persist();
+              todo.title = t; // Atualiza título
+              this.persist(); // Salva alterações
             }
           }
         }
       ]
     });
-    await alert.present();
+    await alert.present(); // Exibe alerta
   }
 
-  async deleteTodo(todo: Todo) {
+  async deleteTodo(todo: Todo) { // Exclui tarefa
     const alert = await this.alertCtrl.create({
       header: 'Excluir',
-      message: `Deseja excluir "${todo.title}"?`,
+      message: `Deseja excluir "${todo.title}"?`, // Mensagem personalizada
       buttons: [
         { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Excluir',
-          role: 'destructive',
+          role: 'destructive', // Estilo destrutivo (normalmente vermelho)
           handler: async () => {
-            this.todos = this.todos.filter(t => t.id !== todo.id);
-            this.persist();
-            const toast = await this.toastCtrl.create({ message: 'Excluída.', duration: 1000 });
-            await toast.present();
+            this.todos = this.todos.filter(t => t.id !== todo.id); // Filtra removendo o item
+            this.persist(); // Salva alterações
+            const toast = await this.toastCtrl.create({
+              message: 'Excluída.',
+              duration: 1000
+            });
+            await toast.present(); // Confirma exclusão
           }
         }
       ]
     });
-    await alert.present();
+    await alert.present(); // Exibe alerta
   }
 
-  clearDone() {
-    this.todos = this.todos.filter(t => !t.done);
-    this.persist();
+  clearDone() { // Remove todas as tarefas concluídas
+    this.todos = this.todos.filter(t => !t.done); // Mantém apenas não concluídas
+    this.persist(); // Salva alterações
   }
 }
