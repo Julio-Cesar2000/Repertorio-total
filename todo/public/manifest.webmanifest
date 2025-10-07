@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "todo",
+  "short_name": "todo",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
