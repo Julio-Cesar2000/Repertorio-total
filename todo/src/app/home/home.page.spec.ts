@@ -7,10 +7,6 @@ describe('HomePage', () => {
   let fixture: ComponentFixture<HomePage>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HomePage]
-    }).compileComponents();
-
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,53 +1,145 @@
+<!-- =====================================================
+  CABEÇALHO PRINCIPAL (toolbar superior)
+===================================================== -->
 <ion-header>
+  <!-- Primeira barra: título + contadores -->
   <ion-toolbar>
     <ion-title>Minhas Tarefas</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="clearDone()" fill="clear">Limpar concluídas</ion-button>
+
+    <!-- "slot=end" posiciona os elementos no canto direito da toolbar -->
+    <ion-buttons slot="end" class="toolbar-stats">
+      <!-- ion-chip cria pequenas etiquetas arredondadas -->
+      <ion-chip>
+        <ion-label>Total: {{ totalCount() }}</ion-label>
+      </ion-chip>
+
+      <ion-chip color="success">
+        <ion-label>Abertas: {{ openCount() }}</ion-label>
+      </ion-chip>
+
+      <ion-chip color="medium">
+        <ion-label>Concluídas: {{ doneCount() }}</ion-label>
+      </ion-chip>
     </ion-buttons>
   </ion-toolbar>
+
+<!-- Segunda barra: filtros e ações rápidas -->
+<ion-toolbar>
+  <ion-segment [(ngModel)]="filterModel">
+  <ion-segment-button value="all">
+    <ion-label>Todas</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="open">
+    <ion-label>Abertas</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="done">
+    <ion-label>Concluídas</ion-label>
+  </ion-segment-button>
+</ion-segment>
+  <!-- Botões do lado direito da toolbar -->
+  <ion-buttons slot="end">
+    <ion-button
+      fill="clear"
+      (click)="markAllDone()"
+      [disabled]="!openCount()"
+    >
+      Marcar tudo
+    </ion-button>
+    <ion-button fill="clear" (click)="clearDone()" [disabled]="!doneCount()">
+      Limpar concluídas
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
 </ion-header>
 
+<!-- =====================================================
+  CONTEÚDO PRINCIPAL DA PÁGINA
+===================================================== -->
 <ion-content class="ion-padding">
-
+  <!-- =====================================================
+    FORMULÁRIO DE ADIÇÃO DE NOVAS TAREFAS
+  ===================================================== -->
   <form (ngSubmit)="addTodo()">
+    <!-- Executa addTodo() ao pressionar Enter ou clicar em "Adicionar" -->
     <ion-item>
+      <!-- Campo de texto vinculado ao model newTitle -->
       <ion-input
         placeholder="Nova tarefa..."
         [(ngModel)]="newTitle"
         name="title"
         required
-        autocomplete="off">
+        autocomplete="off"
+      >
       </ion-input>
+
+      <!-- Botão de adicionar -->
       <ion-button type="submit">Adicionar</ion-button>
     </ion-item>
   </form>
 
-  <ion-list *ngIf="todos.length; else vazio">
-    <ion-item-sliding *ngFor="let todo of todos">
+  <!-- =====================================================
+    BARRA DE BUSCA
+  ===================================================== -->
+  <ion-item lines="none" class="search-row">
+    <!-- Campo de busca vinculado ao model search -->
+    <ion-input
+      placeholder="Buscar por título..."
+      [(ngModel)]="search"
+      name="search"
+      autocomplete="off"
+    >
+    </ion-input>
+
+    <!-- Botão "Limpar" desabilitado se o campo estiver vazio -->
+    <ion-button fill="clear" (click)="clearSearch()" [disabled]="!search">
+      Limpar
+    </ion-button>
+  </ion-item>
+
+  <!-- =====================================================
+    LISTA DE TAREFAS FILTRADAS
+  ===================================================== -->
+  <!-- Mostra a lista se houver tarefas (filteredTodos().length > 0) -->
+  <ion-list *ngIf="filteredTodos().length; else vazio">
+    <!-- Percorre todas as tarefas visíveis após filtro/busca -->
+    <ion-item-sliding *ngFor="let todo of filteredTodos()">
       <ion-item>
+        <!-- Checkbox para marcar como concluída -->
+        <!-- (ionChange) chama toggleDone(todo) -->
         <ion-checkbox
           slot="start"
           [checked]="todo.done"
-          (ionChange)="toggleDone(todo)">
+          (ionChange)="toggleDone(todo)"
+        >
         </ion-checkbox>
 
+        <!-- ion-label contém o título e a data da tarefa -->
+        <!-- [class.done] aplica estilo riscado quando done = true -->
         <ion-label [class.done]="todo.done">
           <h2>{{ todo.title }}</h2>
           <p>Criada em {{ todo.createdAt | date:'short' }}</p>
         </ion-label>
 
+        <!-- Botões de ação à direita -->
         <ion-buttons slot="end">
+          <!-- Editar abre um AlertController com campo de texto -->
           <ion-button (click)="editTodo(todo)" fill="clear">Editar</ion-button>
-          <ion-button color="danger" (click)="deleteTodo(todo)" fill="clear">Excluir</ion-button>
+
+          <!-- Excluir abre um AlertController de confirmação -->
+          <ion-button color="danger" (click)="deleteTodo(todo)" fill="clear">
+            Excluir
+          </ion-button>
         </ion-buttons>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
 
+  <!-- =====================================================
+    BLOCO EXIBIDO QUANDO NÃO HÁ TAREFAS
+  ===================================================== -->
   <ng-template #vazio>
     <ion-text color="medium">
-      <p>Nenhuma tarefa ainda. Adicione a primeira! 🎯</p>
+      <p>Nenhuma tarefa encontrada com esse filtro/busca. ✨</p>
     </ion-text>
   </ng-template>
-
 </ion-content>

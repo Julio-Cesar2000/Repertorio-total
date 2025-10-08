@@ -1,8 +1,56 @@
+/* ============================================================
+  ESTILO GERAL DOS ITENS DA LISTA
+  ------------------------------------------------------------
+  O Ionic usa variáveis CSS para controlar espaçamentos.
+  Aqui, estamos removendo o padding esquerdo padrão (start),
+  deixando os itens mais alinhados com a borda da tela.
+============================================================ */
 ion-item {
   --padding-start: 0;
 }
 
+/* ============================================================
+  ESTILO PARA TAREFAS CONCLUÍDAS
+  ------------------------------------------------------------
+  A classe .done é aplicada dinamicamente no ion-label
+  quando a tarefa está marcada como concluída (done = true).
+  O "h2" dentro dela (título da tarefa) fica riscado e com
+  opacidade reduzida para indicar visualmente o status.
+============================================================ */
 .done h2 {
-  text-decoration: line-through;
-  opacity: 0.6;
+  text-decoration: line-through; /* risca o texto */
+  opacity: 0.6;                  /* deixa o texto mais claro */
 }
+
+/* ============================================================
+  ESTILO DO BLOCO DE CONTADORES (CHIPS) NA TOOLBAR
+  ------------------------------------------------------------
+  A classe .toolbar-stats é atribuída no ion-buttons do cabeçalho.
+  Aqui usamos "gap" para dar um pequeno espaçamento entre os chips.
+============================================================ */
+.toolbar-stats {
+  gap: 0.25rem; /* espaço entre os chips Total / Abertas / Concluídas */
+}
+
+/* ============================================================
+  ESTILO DA LINHA DE BUSCA
+  ------------------------------------------------------------
+  O ion-item da barra de busca tem a classe "search-row".
+  O margin-top cria uma separação visual entre o formulário
+  de adicionar e o campo de busca.
+============================================================ */
+.search-row {
+  margin-top: 0.25rem; /* pequeno espaço acima da linha de busca */
+}
+
+/* ============================================================
+  (DICA OPCIONAL)
+  Você pode adicionar estilos extras aqui, por exemplo:
+
+  ion-chip[color="success"] {
+    font-weight: 600;
+  }
+
+  Para personalizar cores, use variáveis do Ionic:
+  --ion-color-success, --ion-color-danger, etc.
+============================================================ */
