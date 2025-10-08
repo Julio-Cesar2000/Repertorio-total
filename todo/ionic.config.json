@@ -1,6 +1,6 @@
 {
-  "name": "ionic-app-base",
-  "app_id": "",
+  "name": "todo",
+  "app_id": "com.example.todo",
   "type": "angular-standalone",
   "integrations": {}
 }
