@@ -2,5 +2,7 @@
   "name": "todo",
   "app_id": "com.example.todo",
   "type": "angular-standalone",
-  "integrations": {}
+  "integrations": {
+    "capacitor": {}
+  }
 }

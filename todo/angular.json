@@ -18,7 +18,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "www",
+            "outputPath": {
+              "base": "www",
+              "browser": "browser"
+            },
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
@@ -63,10 +66,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
-            },
-            "ci": {
-              "progress": false
+            "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -79,9 +79,6 @@
             },
             "development": {
               "buildTarget": "app:build:development"
-            },
-            "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "development"
@@ -112,7 +109,6 @@
           },
           "configurations": {
             "ci": {
-              "progress": false,
               "watch": false
             }
           }
