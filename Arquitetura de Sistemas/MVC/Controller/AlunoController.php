@@ -2,9 +2,9 @@
 
     class AlunoController {
         public function listarAlunos(): void {
-            $alunoController = New Aluno();
+            $alunoController = new Aluno();
             $alunos = $alunoController->listarTodos();
-            include 'View/alunos.php';
+            include '../View/alunos.php';
         }
         public function adicionar(): void{
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {

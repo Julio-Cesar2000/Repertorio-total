@@ -1,0 +1,26 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "nome": "Smartphone Realme",
+            "preco": 1500,
+            "estoque": 85,
+            "categoria": "Tecnologia"
+        },
+        {
+            "id": 2,
+            "nome": "Smartphone Iphone",
+            "preco": 1500,
+            "estoque": 35,
+            "categoria": "Tecnologia"
+        },
+        {
+            "id": 3,
+            "nome": "Tênis",
+            "preco": 500,
+            "estoque": 125,
+            "categoria": "Moda"
+        }
+    ]
+}

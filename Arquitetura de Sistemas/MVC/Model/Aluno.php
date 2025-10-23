@@ -12,9 +12,9 @@
         }
 
         public function adicionar(string $nome, int $idade): void {
-            $_SESSION['alunos'] = [
-                'nome'=>$nome,
-                'idade'=>$idade
+            $_SESSION['alunos'][] = [
+                'nome' => $nome,
+                'idade' => $idade
             ];
         }
     }
